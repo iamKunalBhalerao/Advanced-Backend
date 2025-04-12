@@ -3,6 +3,6 @@ const SignupRouter = Router();
 
 import signup from "../controllers/Signup.controller.js";
 
-SignupRouter.get("/signup", signup);
+SignupRouter.get("/api/signup", signup);
 
 export default SignupRouter;
