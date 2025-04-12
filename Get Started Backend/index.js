@@ -1,9 +1,9 @@
-import express from "express";
-import { signup } from "./src/controllers/signup.controller.js";
+const express = require("express");
+require("dotenv").config();
+
+const signup = require("./src/controllers/signup.controller");
 
 const app = express();
-
-const port = 3000;
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -11,6 +11,6 @@ app.get("/", (req, res) => {
 
 app.get("/signup", signup);
 
-app.listen(port, () => {
-  console.log(`server is on ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`server is on ${process.env.PORT}`);
 });
