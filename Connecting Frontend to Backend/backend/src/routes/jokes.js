@@ -3,6 +3,6 @@ const JokesRouter = Router();
 
 import jokesController from "../controllers/jokes.controller.js";
 
-JokesRouter.get("/jokes", jokesController);
+JokesRouter.get("/api/jokes", jokesController);
 
 export default JokesRouter;
