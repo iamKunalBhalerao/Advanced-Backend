@@ -14,8 +14,4 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is onP PORT:${process.env.PORT}`);
-});
-
 export { app };
