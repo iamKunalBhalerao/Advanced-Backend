@@ -10,8 +10,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+// Routes Import
+import UserRouter from "./routes/user.route.js";
+
+// Routes Declaration
+app.use("/api/v1/user", UserRouter);
 
 export { app };
