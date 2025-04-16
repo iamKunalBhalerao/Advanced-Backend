@@ -31,14 +31,23 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   const avatarLocalPath = req.files?.avatar[0]?.path;
-  const coverImgLocalPath = req.files?.coverImg[0]?.path;
+  // const coverImgLocalPath = req.files?.coverImage[0]?.path;
+  // OR if user can't send a cover image then entry should be empty string
+  let coverImageLocalPath;
+  if (
+    req.files &&
+    Array.isArray(req.files.coverImage) &&
+    req.files.coverImage.length > 0
+  ) {
+    coverImageLocalPath = req.files.coverImage[0].path;
+  }
 
   if (!avatarLocalPath) {
     throw new ApiError(406, "Avatar is Required !!!");
   }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath);
-  const coverImg = await uploadOnCloudinary(coverImgLocalPath);
+  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
   if (!avatar) {
     throw new ApiError(406, "Avatar is Required !!!");
@@ -50,7 +59,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     avatar: avatar.url,
-    coverImg: coverImg?.url || "",
+    coverImage: coverImage?.url || "",
   });
 
   const userCreated = await User.findById(user._id).select(
